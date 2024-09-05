@@ -26,13 +26,17 @@ public class Employee {
     @Column(name = "last_name",nullable=false)
     private String lastName;
 
-    @Column(name = "email_id",nullable=false)
+    @Column(name = "email_id",nullable=false,unique = true)
     private String email;
+
+    private String imagePath;
+
 
     public  Employee (EmployeeDto employeeDto){
         id=employeeDto.getId();
         firstName=employeeDto.getFirstName();
         lastName=  employeeDto.getLastName();
         email= employeeDto.getEmail();
+       imagePath=employeeDto.getImagePath();
     }
 }

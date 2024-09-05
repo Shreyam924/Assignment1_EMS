@@ -26,15 +26,5 @@ public  class EmployeeCreationService  {
 
         return new EmployeeDto(savedEmployee);
     }
-
-
-    public Employee createOrUpdateEmployee(Long id, String firstname, String lastname,String email) {
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setFirstName(firstname);
-        employee.setLastName(lastname);
-        employee.setEmail(email);
-        return employeeRepository.save(employee);
-    }
 }
 

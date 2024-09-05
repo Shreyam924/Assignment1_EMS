@@ -18,11 +18,13 @@ public class EmployeeDto {
     private String firstName;
     private String lastName;
     private String email;
+    private String imagePath;
 
     public EmployeeDto(Employee employee) {
         id=employee.getId();
         firstName = employee.getFirstName();
         lastName = employee.getLastName();
         email = employee.getEmail();
+        imagePath=employee.getImagePath();
     }
 }

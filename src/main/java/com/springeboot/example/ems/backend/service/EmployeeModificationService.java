@@ -5,27 +5,36 @@ import com.springeboot.example.ems.backend.entity.Employee;
 import com.springeboot.example.ems.backend.exception.ResourceNotFoundException;
 import com.springeboot.example.ems.backend.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.Optional;
+
 
 @Service
 @AllArgsConstructor
-@Data
+public class EmployeeModificationService {
 
-public  class EmployeeModificationService  {
+    private final EmployeeRepository employeeRepository;
+    private final FileStorageService fileStorageService;
 
-    private EmployeeRepository employeeRepository;
+    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee, MultipartFile image) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+        if (!optionalEmployee.isPresent()) {
+            return null;
+        }
 
-    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto updatedEmployee) {
-        Employee employee= employeeRepository.findById(employeeId).orElseThrow(
-                ()->new ResourceNotFoundException("Employee does not exists "+employeeId)
-        );
+        Employee employee = optionalEmployee.get();
         employee.setFirstName(updatedEmployee.getFirstName());
         employee.setLastName(updatedEmployee.getLastName());
         employee.setEmail(updatedEmployee.getEmail());
 
-        Employee updatedEmployeeObj=employeeRepository.save(employee);
-        //return EmployeeDto.mapToEmployeeDto(updatedEmployeeObj);
-        return new EmployeeDto(updatedEmployeeObj);
+        // Save image if provided
+        if (image != null && !image.isEmpty()) {
+            String imagePath = fileStorageService.saveFile(image);
+            employee.setImagePath(imagePath);
+        }
+
+        Employee savedEmployee = employeeRepository.save(employee);
+        return new EmployeeDto(savedEmployee);
     }
 }

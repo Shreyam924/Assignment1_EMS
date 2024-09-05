@@ -29,7 +29,7 @@ class EmployeeServiceDeletionTest{
     }
 
     @Test
-    void testDeleteEmployee_HappyPath() {
+    void testDeleteEmployee_Success() {
         // Arrange
         Long employeeId = 1L;
         Employee employee = new Employee(employeeId, "John", "Doe", "john.doe@example.com");
@@ -44,7 +44,7 @@ class EmployeeServiceDeletionTest{
     }
 
     @Test
-    void testDeleteEmployee_SadPath() {
+    void testDeleteEmployee_Failure() {
         // Arrange
         Long employeeId = 1L;
         when(employeeRepository.findById(employeeId)).thenReturn(Optional.empty());

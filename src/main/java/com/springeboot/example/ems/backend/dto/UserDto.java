@@ -1,13 +1,10 @@
 package com.springeboot.example.ems.backend.dto;
+import com.springeboot.example.ems.backend.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -18,5 +15,11 @@ public class UserDto {
     private String username;
     private String password;
     private String role;
-}
+    private String imagePath;
 
+    public UserDto(User user) {
+        username = user.getUsername();
+        password = user.getPassword();
+        role = user.getRole();
+    }
+}

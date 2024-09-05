@@ -7,10 +7,7 @@ import com.springeboot.example.ems.backend.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,8 +20,6 @@ public  class EmployeeRetrievalService {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employee does not exist with the given id " + employeeId));
-
-        //return EmployeeDto.mapToEmployeeDto(employee);
         return new EmployeeDto(employee);
     }
 
@@ -34,4 +29,4 @@ public  class EmployeeRetrievalService {
                 .map(employee -> new EmployeeDto(employee))
                 .toList();
     }
-    }
+}

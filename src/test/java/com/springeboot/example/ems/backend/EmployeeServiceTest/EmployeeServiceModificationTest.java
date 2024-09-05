@@ -61,7 +61,7 @@ class EmployeeServiceModificationTest {
         when(employeeRepository.findById(employeeId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
+         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
             employeeModificationService.updateEmployee(employeeId, updatedEmployeeDto);
         });
 

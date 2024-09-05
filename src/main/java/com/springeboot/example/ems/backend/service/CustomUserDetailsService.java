@@ -36,6 +36,5 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .roles(user.getRole().replace("ROLE_", ""))
                 .build();
 
-        //return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }
